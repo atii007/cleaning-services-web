@@ -15,7 +15,7 @@ export const PROMO_OFFER = {
     'Eco-friendly products included',
   ],
   image: PLACEHOLDER_IMAGES.sprayBottle,
-  cta: { label: 'Book this offer', href: '/contact' },
+  cta: { label: 'Book this offer', href: '/#contact' },
   delayMs: 6000,
   excludedPaths: ['/contact', '/styleguide'],
 } as const satisfies PromoOffer

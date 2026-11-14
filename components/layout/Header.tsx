@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { PhoneIcon } from 'lucide-react'
+import { FaWhatsapp } from 'react-icons/fa6'
 
 import { HeaderShell } from '@/components/layout/HeaderShell'
 import { MainNav } from '@/components/layout/MainNav'
@@ -8,6 +8,7 @@ import { Logo } from '@/components/shared/Logo'
 import { ThemeSwitcher } from '@/components/shared/ThemeSwitcher'
 import { Button } from '@/components/ui/button'
 import { SITE_CONFIG } from '@/content/site'
+import { getTelHref, getWhatsAppUrl } from '@/lib/contact'
 
 export const Header = () => {
   const { contact, ctas } = SITE_CONFIG
@@ -22,7 +23,7 @@ export const Header = () => {
           <ThemeSwitcher className="hidden xl:inline-flex" />
           {primaryPhone ? (
             <a
-              href={`tel:${primaryPhone.tel}`}
+              href={getTelHref(primaryPhone.tel)}
               className="hidden items-center gap-2.5 rounded-lg px-2 py-1 hover:bg-muted lg:inline-flex"
             >
               <span className="inline-flex size-9 items-center justify-center rounded-full bg-primary-muted text-primary-muted-foreground">
@@ -38,8 +39,19 @@ export const Header = () => {
               </span>
             </a>
           ) : null}
-          <Button asChild size="lg" className="hidden h-10 px-4 sm:inline-flex">
-            <Link href={ctas.quote.href}>{ctas.quote.label}</Link>
+          <Button
+            asChild
+            size="lg"
+            className="hidden h-10 bg-success px-4 text-success-foreground hover:bg-success/85 sm:inline-flex"
+          >
+            <a
+              href={getWhatsAppUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaWhatsapp aria-hidden />
+              {ctas.whatsapp}
+            </a>
           </Button>
           <MobileNav />
         </div>

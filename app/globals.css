@@ -204,6 +204,9 @@
   --color-overlay: var(--overlay);
   --color-overlay-foreground: var(--overlay-foreground);
 
+  --animate-marquee: marquee 45s linear infinite;
+  --animate-marquee-rtl: marquee-rtl 45s linear infinite;
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -211,6 +214,18 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-rtl {
+  to {
+    transform: translateX(50%);
+  }
 }
 
 /* Single source for vertical rhythm between page sections. */
