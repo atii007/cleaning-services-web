@@ -99,6 +99,10 @@
   --inverse: var(--brand-navy-950);
   --inverse-foreground: var(--brand-gray-200);
   --inverse-muted-foreground: var(--brand-gray-400);
+
+  /* Scrim over photography (hero banners) — keeps text legible in both themes */
+  --overlay: oklch(0.16 0.03 260 / 72%);
+  --overlay-foreground: var(--brand-white);
 }
 
 .dark {
@@ -139,6 +143,8 @@
   --ring: var(--brand-teal-300);
 
   --inverse: oklch(0.12 0.02 260);
+
+  --overlay: oklch(0.12 0.02 260 / 78%);
 }
 
 /* ────────────────────────────────────────────────────────────────────────────
@@ -195,6 +201,9 @@
   --color-inverse-foreground: var(--inverse-foreground);
   --color-inverse-muted-foreground: var(--inverse-muted-foreground);
 
+  --color-overlay: var(--overlay);
+  --color-overlay-foreground: var(--overlay-foreground);
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -210,6 +219,24 @@
   @media (width >= 48rem) {
     padding-block: 6rem;
   }
+}
+
+/* Compact rhythm for bands (CTA strips, sub-sections). */
+@utility section-sm {
+  padding-block: 3rem;
+  @media (width >= 48rem) {
+    padding-block: 4rem;
+  }
+}
+
+/* Small uppercase label above section headings. */
+@utility eyebrow {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
 }
 
 /* Centered page container with a 1rem minimum gutter. */
@@ -252,5 +279,21 @@
     html {
       @apply scroll-auto;
     }
+  }
+}
+
+/*
+ * Reduced-motion safety net. tw-animate-css (used by every shadcn primitive)
+ * ignores the preference, so neutralise animations and transitions globally.
+ * Unlayered + !important so it wins over utility classes.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
