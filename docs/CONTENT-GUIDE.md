@@ -65,6 +65,36 @@ Every page section is optional and appears only when its data is present:
 
 Section backgrounds alternate automatically over whatever sections are present.
 
+### Sub-service pages
+
+A sub-service gets its own page at `/services/<service>/<sub-service>` only if it has a `detail` block. Without one, its card just books on WhatsApp.
+
+```ts
+{
+  slug: 'bed-bug-treatment',
+  title: 'Bed Bug Treatment',
+  summary: '…',
+  icon: 'bed',
+  priceFrom: 75,
+  detail: {
+    description: ['First paragraph…', 'Second paragraph…'],
+    included: ['Inspection', 'Treatment', 'Follow-up visit'], // optional checklist
+    image: PLACEHOLDER_IMAGES.bedroom, // optional
+    faqs: [{ question: '…', answer: '…' }], // optional; falls back to the category's FAQs
+  },
+}
+```
+
+When a sub-service has a page:
+
+- its card shows a "Learn more" link
+- the page joins the sitemap
+- the page is linked from its sibling sub-services
+
+Remove `detail` to take the page down.
+
+The sub-service slug `areas` is reserved for area pages, and the build fails with a clear message if one uses it.
+
 ## Prices and currency
 
 Prices are plain numbers, such as `priceFrom: 45` or `price: 150`. They are formatted with the currency in `content/site.ts`:
@@ -79,7 +109,13 @@ Icon fields take a name from `lib/icons.ts`, for example `'bug'`, `'sofa'` or `'
 
 ## Areas
 
-`content/areas.ts` is a list of area names, of any length. Leave it empty (`[]`) to hide every "Areas we serve" section.
+`content/areas.ts` is a plain list of area names, of any length. Every service gets a page per area at `/services/<service>/areas/<area-slug>`, for example "Pest Control in Al Bateen". The slug comes from the name, so `Al Reem Island` becomes `al-reem-island`.
+
+- **Adding or removing a name** adds or removes those pages, their links on service pages, and their sitemap entries.
+- **An empty list (`[]`)** hides every areas section and creates no area pages.
+- **Area page text** comes from the templates in `content/service-page.ts` (`area.*`), with the service and area names filled in. Everything else on the page comes from the service's own content: sub-services, plans, benefits and FAQs.
+
+Renaming an area changes its URL. Once the site is live, add a redirect in `next.config.ts` for the old URL.
 
 ## Images
 

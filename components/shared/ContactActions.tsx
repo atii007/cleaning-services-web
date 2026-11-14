@@ -15,6 +15,8 @@ type ContactActionsProps = {
   inverse?: boolean
   /** Stack buttons full-width (drawer, narrow cards). */
   stacked?: boolean
+  /** Pre-filled WhatsApp text, e.g. naming the service being viewed. */
+  whatsappMessage?: string
   /** Overrides the quote link, e.g. `#contact` on pages with their own form. */
   quoteHref?: string
   /** Called when any action is clicked, e.g. to close a drawer. */
@@ -29,6 +31,7 @@ export const ContactActions = ({
   actions = ['whatsapp', 'call', 'quote'],
   inverse = false,
   stacked = false,
+  whatsappMessage,
   quoteHref,
   onAction,
   className,
@@ -87,7 +90,7 @@ export const ContactActions = ({
             )}
           >
             <a
-              href={getWhatsAppUrl()}
+              href={getWhatsAppUrl(whatsappMessage)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={onAction}

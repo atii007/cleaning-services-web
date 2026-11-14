@@ -1,23 +1,22 @@
-import type * as React from 'react'
-
 import { ContactActions } from '@/components/shared/ContactActions'
 import { CtaBand } from '@/components/shared/CtaBand'
-import { EnquirySection } from '@/components/shared/EnquirySection'
 import { PageHero } from '@/components/shared/PageHero'
-import { SERVICE_AREAS } from '@/content/areas'
+import { AREAS } from '@/content/areas'
 import { SERVICE_PAGE_COPY } from '@/content/service-page'
 import { getStartingPrice } from '@/content/services'
 import { getServiceJsonLd, serializeJsonLd } from '@/lib/seo'
-import { AreasServed } from '@/sections/services/AreasServed'
-import { PlansComparison } from '@/sections/services/PlansComparison'
-import { ServiceBenefits } from '@/sections/services/ServiceBenefits'
+import { SectionStack } from '@/sections/services/SectionStack'
 import { ServiceContentBlocks } from '@/sections/services/ServiceContentBlocks'
-import { ServiceFaq } from '@/sections/services/ServiceFaq'
 import { ServiceIntro } from '@/sections/services/ServiceIntro'
-import { SubServiceGrid } from '@/sections/services/SubServiceGrid'
+import {
+  areasSection,
+  benefitsSection,
+  enquirySection,
+  faqSection,
+  plansSection,
+  subServicesSection,
+} from '@/sections/services/serviceSections'
 import type { ServiceCategory } from '@/types/content'
-
-type SectionRenderer = (className: string | undefined) => React.ReactNode
 
 /**
  * The service category template. Every section is optional: it is only
@@ -30,97 +29,38 @@ export const ServiceCategoryPage = ({
 }: {
   service: ServiceCategory
 }) => {
-  const { title, intro, subServices, blocks, plans, planFeatures } = service
-  const { benefits, faqs } = service
+  const { title, intro, blocks } = service
   const startingPrice = getStartingPrice(service)
 
-  const sections: [string, SectionRenderer][] = []
-  if (intro) {
-    sections.push([
-      'intro',
-      (className) => (
-        <ServiceIntro
-          intro={intro}
-          eyebrow={title}
-          startingPrice={startingPrice}
-          className={className}
-        />
-      ),
-    ])
-  }
-  if (subServices && subServices.length > 0) {
-    sections.push([
-      'sub-services',
-      (className) => (
-        <SubServiceGrid
-          serviceTitle={title}
-          items={subServices}
-          className={className}
-        />
-      ),
-    ])
-  }
-  if (blocks && blocks.length > 0) {
-    sections.push([
-      'blocks',
-      (className) => (
-        <ServiceContentBlocks blocks={blocks} className={className} />
-      ),
-    ])
-  }
-  if (plans && plans.length > 0) {
-    sections.push([
-      'plans',
-      (className) => (
-        <PlansComparison
-          serviceTitle={title}
-          plans={plans}
-          features={planFeatures}
-          className={className}
-        />
-      ),
-    ])
-  }
-  if (benefits && benefits.length > 0) {
-    sections.push([
-      'benefits',
-      (className) => (
-        <ServiceBenefits
-          serviceTitle={title}
-          benefits={benefits}
-          className={className}
-        />
-      ),
-    ])
-  }
-  if (faqs && faqs.length > 0) {
-    sections.push([
-      'faqs',
-      (className) => <ServiceFaq faqs={faqs} className={className} />,
-    ])
-  }
-  if (SERVICE_AREAS.length > 0) {
-    sections.push([
-      'areas',
-      (className) => (
-        <AreasServed
-          serviceTitle={title}
-          areas={SERVICE_AREAS}
-          className={className}
-        />
-      ),
-    ])
-  }
-  sections.push([
-    'enquiry',
-    (className) => (
-      <EnquirySection
-        defaultService={service.slug}
-        title={SERVICE_PAGE_COPY.enquiryTitle(title)}
-        className={className}
-      />
-    ),
-  ])
+  const sections = [
+    intro
+      ? {
+          key: 'intro',
+          render: (className: string | undefined) => (
+            <ServiceIntro
+              intro={intro}
+              eyebrow={title}
+              startingPrice={startingPrice}
+              className={className}
+            />
+          ),
+        }
+      : null,
+    subServicesSection(service),
+    blocks && blocks.length > 0
+      ? {
+          key: 'blocks',
+          render: (className: string | undefined) => (
+            <ServiceContentBlocks blocks={blocks} className={className} />
+          ),
+        }
+      : null,
+    plansSection(service),
+    benefitsSection(service),
+    faqSection(service.faqs),
+    areasSection(service, AREAS),
+    enquirySection(service),
+  ]
 
   return (
     <>
@@ -141,11 +81,7 @@ export const ServiceCategoryPage = ({
         ]}
         actions={<ContactActions actions={['whatsapp', 'call']} inverse />}
       />
-      {sections.map(([key, render], index) => (
-        <div key={key}>
-          {render(index % 2 === 1 ? 'bg-surface' : undefined)}
-        </div>
-      ))}
+      <SectionStack sections={sections} />
       <CtaBand quoteHref="#contact" />
     </>
   )

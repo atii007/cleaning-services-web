@@ -48,32 +48,48 @@ export const getBreadcrumbJsonLd = (
   })),
 })
 
-/** schema.org Service JSON-LD for a service category page. */
-export const getServiceJsonLd = (service: ServiceCategory) => ({
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  name: service.title,
-  description: service.metaDescription ?? service.summary,
-  url: absoluteUrl(getServiceHref(service.slug)),
-  image: service.image.src,
-  provider: {
-    '@type': 'LocalBusiness',
-    name: SITE_CONFIG.name,
-    url: absoluteUrl('/'),
-  },
-  ...(SERVICE_AREAS.length > 0
-    ? { areaServed: SERVICE_AREAS.map((name) => ({ '@type': 'Place', name })) }
-    : {}),
-  ...(service.subServices && service.subServices.length > 0
-    ? {
-        hasOfferCatalog: {
-          '@type': 'OfferCatalog',
-          name: service.title,
-          itemListElement: service.subServices.map((sub) => ({
-            '@type': 'Offer',
-            itemOffered: { '@type': 'Service', name: sub.title },
-          })),
-        },
-      }
-    : {}),
-})
+/**
+ * schema.org Service JSON-LD. Defaults describe the category page; pass
+ * overrides for sub-service and area pages.
+ */
+export const getServiceJsonLd = (
+  service: ServiceCategory,
+  overrides: {
+    name?: string
+    description?: string
+    path?: string
+    areas?: readonly string[]
+  } = {}
+) => {
+  const areas = overrides.areas ?? SERVICE_AREAS
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: overrides.name ?? service.title,
+    serviceType: service.title,
+    description:
+      overrides.description ?? service.metaDescription ?? service.summary,
+    url: absoluteUrl(overrides.path ?? getServiceHref(service.slug)),
+    image: service.image.src,
+    provider: {
+      '@type': 'LocalBusiness',
+      name: SITE_CONFIG.name,
+      url: absoluteUrl('/'),
+    },
+    ...(areas.length > 0
+      ? { areaServed: areas.map((name) => ({ '@type': 'Place', name })) }
+      : {}),
+    ...(service.subServices && service.subServices.length > 0
+      ? {
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: service.title,
+            itemListElement: service.subServices.map((sub) => ({
+              '@type': 'Offer',
+              itemOffered: { '@type': 'Service', name: sub.title },
+            })),
+          },
+        }
+      : {}),
+  }
+}

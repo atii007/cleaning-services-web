@@ -59,9 +59,12 @@ const openWhatsApp = (url: string) => {
  */
 export const EnquiryForm = ({
   defaultService,
+  defaultArea = '',
 }: {
   /** Preselects a service slug, e.g. on that service's own page. */
   defaultService?: string
+  /** Prefills the area field, e.g. on an area page. */
+  defaultArea?: string
 }) => {
   const id = React.useId()
   const { fields } = ENQUIRY_FORM
@@ -73,7 +76,7 @@ export const EnquiryForm = ({
       service: defaultService,
       name: '',
       phone: '',
-      area: '',
+      area: defaultArea,
       preferredDate: '',
       message: '',
     },

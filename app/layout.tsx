@@ -52,6 +52,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
     <html
       lang="en"
       dir="ltr"
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={`${inter.variable} ${jakarta.variable}`}
     >
