@@ -7,6 +7,7 @@ The single source of truth for humans and AI agents. `CLAUDE.md` and `AGENTS.md`
 - **Ask before** you commit, push, add a dependency, or make an architecture or scope decision.
 - Read `node_modules/next/dist/docs/` before using a Next.js API you are unsure of. This is Next 16, with Cache Components and `proxy.ts` (formerly middleware).
 - Run `yarn check` and `yarn build` before saying work is done.
+- **Track every plan in the repo.** Once a plan is approved, save it as `docs/plans/phase-NN-<name>.md` with status `In progress` **before** writing code, and update the roadmap in `docs/plans/README.md`. When the work is finished, fill in the plan's **Outcome** section (what was delivered, any changes from the plan, what is still open), set the status to `Done`, and commit those changes with the work.
 
 ## 2. UI and UX
 
