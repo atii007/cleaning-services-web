@@ -38,6 +38,22 @@ export const DEEP_CLEANING: ServiceCategory = {
       summary: LOREM,
       icon: 'house',
       priceFrom: 180,
+      detail: {
+        description: [LOREM_LONG, LOREM],
+        included: [
+          'Every room, top to bottom',
+          'Kitchen degreasing and appliance exteriors',
+          'Bathroom descaling and sanitisation',
+          'Windows, frames and tracks',
+          'Balconies and outdoor seating',
+        ],
+        image: PLACEHOLDER_IMAGES.villa,
+        faqs: [
+          { question: 'How long does it take?', answer: LOREM },
+          { question: 'What do I need to prepare?', answer: LOREM_LONG },
+          { question: 'Is it safe for children and pets?', answer: LOREM },
+        ],
+      },
     },
     {
       slug: 'apartment-deep-cleaning',
@@ -52,6 +68,16 @@ export const DEEP_CLEANING: ServiceCategory = {
       summary: LOREM,
       icon: 'cooking-pot',
       priceFrom: 80,
+      detail: {
+        description: [LOREM_LONG, LOREM],
+        included: [
+          'Oven, hob and hood degreasing',
+          'Inside cabinets and drawers',
+          'Tiles, grout and splashbacks',
+          'Sink and tap descaling',
+        ],
+        image: PLACEHOLDER_IMAGES.windowCleaning,
+      },
     },
     {
       slug: 'bathroom-deep-cleaning',
@@ -73,6 +99,15 @@ export const DEEP_CLEANING: ServiceCategory = {
       summary: LOREM,
       icon: 'air-vent',
       priceFrom: 90,
+      detail: {
+        description: [LOREM_LONG, LOREM],
+        included: [
+          'Duct inspection',
+          'Vent and grille cleaning',
+          'Coil sanitisation',
+          'Before/after report',
+        ],
+      },
     },
   ],
   blocks: [

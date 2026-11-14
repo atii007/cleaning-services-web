@@ -45,6 +45,16 @@ export const PEST_CONTROL: ServiceCategory = {
       summary: LOREM,
       icon: 'bug',
       priceFrom: 40,
+      detail: {
+        description: [LOREM_LONG, LOREM],
+        included: [
+          'Gel baiting in kitchens and bathrooms',
+          'Crack and crevice spraying',
+          'Drain treatment',
+          '30-day warranty',
+        ],
+        image: PLACEHOLDER_IMAGES.sprayBottle,
+      },
     },
     {
       slug: 'bed-bug-treatment',
@@ -52,6 +62,21 @@ export const PEST_CONTROL: ServiceCategory = {
       summary: LOREM,
       icon: 'bed',
       priceFrom: 75,
+      detail: {
+        description: [LOREM_LONG, LOREM],
+        included: [
+          'Mattress, bed frame and furniture inspection',
+          'Targeted heat or spray treatment',
+          'Follow-up visit after 14 days',
+          'Prevention advice',
+        ],
+        image: PLACEHOLDER_IMAGES.bedroom,
+        faqs: [
+          { question: 'How long does it take?', answer: LOREM },
+          { question: 'What do I need to prepare?', answer: LOREM_LONG },
+          { question: 'Is it safe for children and pets?', answer: LOREM },
+        ],
+      },
     },
     {
       slug: 'rodent-control',
@@ -80,6 +105,15 @@ export const PEST_CONTROL: ServiceCategory = {
       summary: LOREM,
       icon: 'microscope',
       priceFrom: 150,
+      detail: {
+        description: [LOREM_LONG, LOREM],
+        included: [
+          'Full property inspection',
+          'Soil and wood treatment',
+          'Bait station installation',
+          '12-month warranty',
+        ],
+      },
     },
     {
       slug: 'pest-control-contracts',

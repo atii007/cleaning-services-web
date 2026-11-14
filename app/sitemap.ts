@@ -1,21 +1,17 @@
 import type { MetadataRoute } from 'next'
 
-import { getServiceHref, SERVICE_CATEGORIES } from '@/content/services'
+import { getAllServicePaths } from '@/content/services'
 import { absoluteUrl } from '@/lib/seo'
 
-/** Derived from content, so new services appear automatically. */
+/** Derived from content, so new services, sub-services and areas appear automatically. */
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: absoluteUrl('/'), changeFrequency: 'weekly', priority: 1 },
-    {
-      url: absoluteUrl('/services'),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    ...SERVICE_CATEGORIES.map((service) => ({
-      url: absoluteUrl(getServiceHref(service.slug)),
+    ...getAllServicePaths().map((path) => ({
+      url: absoluteUrl(path),
       changeFrequency: 'monthly' as const,
-      priority: 0.8,
+      // Deeper pages get slightly lower priority.
+      priority: Math.max(0.5, 1 - path.split('/').length * 0.1),
     })),
   ]
 }

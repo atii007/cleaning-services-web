@@ -17,6 +17,20 @@ export type SubService = {
   icon: IconName
   /** Starting price, in the site currency. Omit to hide the price. */
   priceFrom?: number
+  /**
+   * Optional page content. A sub-service gets its own page at
+   * /services/<category>/<slug> only when this is present.
+   */
+  detail?: SubServiceDetail
+}
+
+export type SubServiceDetail = {
+  description: string[]
+  /** "What's included" checklist. */
+  included?: string[]
+  image?: ImageAsset
+  /** Falls back to the category's FAQs when omitted. */
+  faqs?: Faq[]
 }
 
 export type ContentBlock = {

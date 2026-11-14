@@ -1,3 +1,5 @@
+import { slugify } from '@/lib/slug'
+
 /**
  * Areas served — PLACEHOLDER CONTENT. Any length; leave the array empty to
  * hide every "Areas we serve" section. Phase 4 area pages derive from it.
@@ -36,3 +38,14 @@ export const SERVICE_AREAS: readonly string[] = [
   'Shakhbout City',
   'Yas Island',
 ]
+
+export type ServiceArea = { name: string; slug: string }
+
+/** Areas with URL slugs derived from their names. */
+export const AREAS: readonly ServiceArea[] = SERVICE_AREAS.map((name) => ({
+  name,
+  slug: slugify(name),
+}))
+
+export const getAreaBySlug = (slug: string) =>
+  AREAS.find((area) => area.slug === slug)

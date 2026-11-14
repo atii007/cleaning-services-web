@@ -15,6 +15,8 @@ const ROW_CLASS =
 type EnquirySectionProps = {
   /** Preselects a service slug in the form. */
   defaultService?: string
+  /** Prefills the area field in the form. */
+  defaultArea?: string
   /** Overrides the default section heading. */
   title?: string
   className?: string
@@ -26,6 +28,7 @@ type EnquirySectionProps = {
  */
 export const EnquirySection = ({
   defaultService,
+  defaultArea,
   title = CONTACT_SECTION.title,
   className,
 }: EnquirySectionProps) => {
@@ -146,7 +149,10 @@ export const EnquirySection = ({
           </aside>
 
           <div className="lg:col-span-3">
-            <EnquiryForm defaultService={defaultService} />
+            <EnquiryForm
+              defaultService={defaultService}
+              defaultArea={defaultArea}
+            />
           </div>
         </div>
       </div>

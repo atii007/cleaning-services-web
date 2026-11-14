@@ -39,6 +39,26 @@ export const SERVICE_PAGE_COPY = {
     title: (service: string) => `${service} across the city`,
     description: (count: number) => `We currently serve ${count} areas.`,
   },
+  learnMore: 'Learn more',
+  subService: {
+    included: "What's included",
+    related: (service: string) => `More ${service.toLowerCase()} services`,
+  },
+  area: {
+    eyebrow: (area: string) => `Serving ${area}`,
+    title: (service: string, area: string) => `${service} in ${area}`,
+    description: (service: string, area: string) =>
+      `Lorem ipsum dolor sit amet — trusted ${service.toLowerCase()} for homes and businesses in ${area}. Same-day slots, trained staff and WhatsApp booking.`,
+    introTitle: (service: string, area: string) =>
+      `Professional ${service.toLowerCase()} in ${area}`,
+    intro: (service: string, area: string) => [
+      `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Our ${service.toLowerCase()} team covers every part of ${area}, from apartments to villas and offices.`,
+      'Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Vestibulum id ligula porta felis euismod semper.',
+    ],
+    otherAreasTitle: (service: string) => `${service} in other areas`,
+    metaDescription: (service: string, area: string) =>
+      `${service} in ${area}: trained staff, eco-friendly products and fast WhatsApp booking.`,
+  },
   enquiryTitle: (service: string) =>
     `Book ${service.toLowerCase()} — we reply on WhatsApp in minutes`,
 } as const
