@@ -5,6 +5,7 @@ import { ArrowRightIcon } from 'lucide-react'
 import { Reveal } from '@/components/shared/Reveal'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { ServiceIcon } from '@/components/shared/ServiceIcon'
+import { SERVICES_SECTION } from '@/content/home'
 import { getServiceHref, SERVICE_CATEGORIES } from '@/content/services'
 
 export const ServicesOverview = () => (
@@ -12,8 +13,8 @@ export const ServicesOverview = () => (
     <div className="container-page">
       <SectionHeading
         id="services-heading"
-        eyebrow="What we do"
-        title="One trusted team for every space"
+        eyebrow={SERVICES_SECTION.eyebrow}
+        title={SERVICES_SECTION.title}
       />
       <ul className="mt-12 grid gap-6 md:grid-cols-3">
         {SERVICE_CATEGORIES.map((service, index) => (
