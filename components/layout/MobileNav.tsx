@@ -5,8 +5,8 @@ import { ClockIcon, MenuIcon } from 'lucide-react'
 
 import { NavLink } from '@/components/layout/NavLink'
 import { ContactActions } from '@/components/shared/ContactActions'
+import { Icon } from '@/components/shared/Icon'
 import { Logo } from '@/components/shared/Logo'
-import { ServiceIcon } from '@/components/shared/ServiceIcon'
 import { getSocialLabel, SocialIcon } from '@/components/shared/SocialIcon'
 import { ThemeSwitcher } from '@/components/shared/ThemeSwitcher'
 import {
@@ -81,7 +81,7 @@ export const MobileNav = () => {
                                 onClick={closeMenu}
                                 className={LINK_CLASS}
                               >
-                                <ServiceIcon
+                                <Icon
                                   name={child.icon}
                                   className="size-4 text-primary"
                                 />

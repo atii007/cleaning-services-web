@@ -1,5 +1,8 @@
+import { SERVICE_AREAS } from '@/content/areas'
+import { getServiceHref } from '@/content/services'
 import { SITE_CONFIG } from '@/content/site'
 import { env } from '@/lib/env'
+import type { ServiceCategory } from '@/types/content'
 
 export const absoluteUrl = (path = '/'): string =>
   new URL(path, env.NEXT_PUBLIC_SITE_URL).toString()
@@ -43,4 +46,34 @@ export const getBreadcrumbJsonLd = (
     name: item.label,
     item: absoluteUrl(item.href),
   })),
+})
+
+/** schema.org Service JSON-LD for a service category page. */
+export const getServiceJsonLd = (service: ServiceCategory) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: service.title,
+  description: service.metaDescription ?? service.summary,
+  url: absoluteUrl(getServiceHref(service.slug)),
+  image: service.image.src,
+  provider: {
+    '@type': 'LocalBusiness',
+    name: SITE_CONFIG.name,
+    url: absoluteUrl('/'),
+  },
+  ...(SERVICE_AREAS.length > 0
+    ? { areaServed: SERVICE_AREAS.map((name) => ({ '@type': 'Place', name })) }
+    : {}),
+  ...(service.subServices && service.subServices.length > 0
+    ? {
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: service.title,
+          itemListElement: service.subServices.map((sub) => ({
+            '@type': 'Offer',
+            itemOffered: { '@type': 'Service', name: sub.title },
+          })),
+        },
+      }
+    : {}),
 })

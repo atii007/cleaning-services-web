@@ -1,30 +1,7 @@
-import type { LucideIcon } from 'lucide-react'
-import {
-  Building2Icon,
-  FactoryIcon,
-  HospitalIcon,
-  HotelIcon,
-  LandmarkIcon,
-  SchoolIcon,
-  StoreIcon,
-  WarehouseIcon,
-} from 'lucide-react'
-
+import { Icon } from '@/components/shared/Icon'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { CLIENT_LOGOS } from '@/content/clients'
 import { CLIENTS_SECTION } from '@/content/home'
-import type { ClientLogoIcon } from '@/types/content'
-
-const LOGO_ICONS: Record<ClientLogoIcon, LucideIcon> = {
-  building: Building2Icon,
-  hotel: HotelIcon,
-  hospital: HospitalIcon,
-  school: SchoolIcon,
-  store: StoreIcon,
-  factory: FactoryIcon,
-  landmark: LandmarkIcon,
-  warehouse: WarehouseIcon,
-}
 
 const LogoList = ({ hidden = false }: { hidden?: boolean }) => (
   <ul
@@ -36,13 +13,12 @@ const LogoList = ({ hidden = false }: { hidden?: boolean }) => (
     }
   >
     {CLIENT_LOGOS.map((client) => {
-      const Icon = LOGO_ICONS[client.icon]
       return (
         <li
           key={client.name}
           className="inline-flex h-16 items-center gap-2.5 rounded-xl border bg-card px-5 text-muted-foreground grayscale transition hover:text-heading hover:grayscale-0"
         >
-          <Icon className="size-6 text-primary" aria-hidden />
+          <Icon name={client.icon} className="size-6 text-primary" />
           <span className="font-heading text-base font-bold whitespace-nowrap">
             {client.name}
           </span>

@@ -1,11 +1,11 @@
-import type { CtaLink, ImageAsset, ServiceIconName } from '@/types/content'
+import type { CtaLink, IconName, ImageAsset } from '@/types/content'
 
 export type NavItem = {
   label: string
   href: string
   /** Short helper text shown in the desktop mega-menu. */
   description?: string
-  icon?: ServiceIconName
+  icon?: IconName
   children?: NavItem[]
   /** Promo card shown beside the children in the desktop mega-menu. */
   featured?: NavFeature
@@ -30,13 +30,10 @@ export type SocialLink = {
   href: string
 }
 
-export type CertificationIcon =
-  'award' | 'badge' | 'leaf' | 'shield' | 'recycle' | 'landmark'
-
 export type Certification = {
   name: string
   issuer: string
-  icon: CertificationIcon
+  icon: IconName
 }
 
 export type SiteConfig = {
@@ -74,4 +71,6 @@ export type SiteConfig = {
     legal: NavItem[]
   }
   certifications: Certification[]
+  /** Prices in content are plain numbers in this currency. */
+  currency: { code: string; locale: string }
 }

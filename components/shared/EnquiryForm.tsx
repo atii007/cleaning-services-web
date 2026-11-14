@@ -24,7 +24,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
-import { ENQUIRY_FORM } from '@/content/home'
+import { ENQUIRY_FORM } from '@/content/contact'
 import { SERVICE_CATEGORIES } from '@/content/services'
 import { SITE_CONFIG } from '@/content/site'
 import { buildEnquiryMessage, getTelHref, getWhatsAppUrl } from '@/lib/contact'
@@ -57,7 +57,12 @@ const openWhatsApp = (url: string) => {
  * enquiry to WhatsApp as a pre-filled message — nothing is lost while the
  * email backend (Phase 6) doesn't exist.
  */
-export const EnquiryForm = () => {
+export const EnquiryForm = ({
+  defaultService,
+}: {
+  /** Preselects a service slug, e.g. on that service's own page. */
+  defaultService?: string
+}) => {
   const id = React.useId()
   const { fields } = ENQUIRY_FORM
   const primaryPhone = SITE_CONFIG.contact.phones[0]
@@ -65,6 +70,7 @@ export const EnquiryForm = () => {
   const form = useForm<EnquiryValues>({
     resolver: zodResolver(enquirySchema),
     defaultValues: {
+      service: defaultService,
       name: '',
       phone: '',
       area: '',

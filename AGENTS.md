@@ -15,3 +15,4 @@ Follow these before writing any code:
 - [docs/agent/ALWAYS-APPLY-RULES.md](docs/agent/ALWAYS-APPLY-RULES.md) — the single source of truth
 - [docs/CODE-BEST-PRACTICES.md](docs/CODE-BEST-PRACTICES.md)
 - [docs/BRANCHING-STRATEGY.md](docs/BRANCHING-STRATEGY.md)
+- [docs/CONTENT-GUIDE.md](docs/CONTENT-GUIDE.md): all copy and data is placeholder and content-driven, so never hard-code a specific service in components
