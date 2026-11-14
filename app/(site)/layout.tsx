@@ -1,6 +1,7 @@
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
 import { TopBar } from '@/components/layout/TopBar'
+import { PromoDialog } from '@/components/shared/PromoDialog'
 import { WhatsAppButton } from '@/components/shared/WhatsAppButton'
 
 export default function SiteLayout({ children }: LayoutProps<'/'>) {
@@ -19,6 +20,7 @@ export default function SiteLayout({ children }: LayoutProps<'/'>) {
       </main>
       <Footer />
       <WhatsAppButton />
+      <PromoDialog />
     </>
   )
 }

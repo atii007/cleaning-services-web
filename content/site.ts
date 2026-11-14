@@ -1,3 +1,5 @@
+import { PLACEHOLDER_IMAGES } from '@/content/images'
+import { SERVICE_NAV_ITEMS } from '@/content/services'
 import type { SiteConfig } from '@/types/site'
 
 /**
@@ -25,6 +27,12 @@ export const SITE_CONFIG = {
       country: 'AE',
     },
     hours: 'Open 24/7',
+    availability: 'Always online — book any time, day or night',
+  },
+  ctas: {
+    quote: { label: 'Get a free quote', href: '/contact' },
+    call: 'Call us',
+    whatsapp: 'WhatsApp us',
   },
   socials: [
     { platform: 'facebook', href: 'https://facebook.com' },
@@ -38,21 +46,20 @@ export const SITE_CONFIG = {
     {
       label: 'Services',
       href: '/services',
-      children: [
-        { label: 'Deep Cleaning', href: '/services/deep-cleaning' },
-        { label: 'Maid Services', href: '/services/maid-services' },
-        { label: 'Pest Control', href: '/services/pest-control' },
-      ],
+      children: SERVICE_NAV_ITEMS,
+      featured: {
+        title: 'Not sure what you need?',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tell us about your space.',
+        image: PLACEHOLDER_IMAGES.bathroom,
+        cta: { label: 'Get a free quote', href: '/contact' },
+      },
     },
     { label: 'Blog', href: '/blog' },
     { label: 'Contact', href: '/contact' },
   ],
   footerNav: {
-    services: [
-      { label: 'Deep Cleaning', href: '/services/deep-cleaning' },
-      { label: 'Maid Services', href: '/services/maid-services' },
-      { label: 'Pest Control', href: '/services/pest-control' },
-    ],
+    services: SERVICE_NAV_ITEMS,
     company: [
       { label: 'About us', href: '/about' },
       { label: 'Blog', href: '/blog' },
@@ -64,4 +71,12 @@ export const SITE_CONFIG = {
       { label: 'Terms & Conditions', href: '/terms' },
     ],
   },
+  certifications: [
+    { name: 'ISO 9001', issuer: 'Quality management', icon: 'award' },
+    { name: 'ISO 14001', issuer: 'Environmental management', icon: 'leaf' },
+    { name: 'ISO 45001', issuer: 'Health & safety', icon: 'shield' },
+    { name: 'Public Health', issuer: 'Pest control licence', icon: 'landmark' },
+    { name: 'Waste Management', issuer: 'Licensed disposal', icon: 'recycle' },
+    { name: 'ICV Certified', issuer: 'In-country value', icon: 'badge' },
+  ],
 } as const satisfies SiteConfig
