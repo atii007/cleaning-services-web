@@ -1,0 +1,61 @@
+name: PR checks (scan & verify)
+
+# One pipeline per pull request into development or main. It does not run
+# again on push/merge: the PR run is the gate, and branch protection blocks
+# merging until every check below is green.
+on:
+  pull_request:
+    branches: [development, main]
+  workflow_dispatch:
+
+concurrency:
+  group: pr-checks-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  # CI-only placeholder. lib/env.ts fails production builds without a valid
+  # site URL; the real value is set in Vercel. This build is never deployed.
+  NEXT_PUBLIC_SITE_URL: https://example.com
+  NEXT_TELEMETRY_DISABLED: 1
+
+jobs:
+  # ── Stage 1: scan before anything is installed ───────────────────────────
+  # Install-time hooks are an attack vector, so nothing runs `yarn install`
+  # until this passes.
+  scan:
+    name: Malware scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Scan tracked files
+        run: sh scripts/security/scan-malware.sh --all
+
+  # ── Stage 2: verify (parallel checks, each reported separately) ──────────
+  verify:
+    name: ${{ matrix.check.name }}
+    needs: scan
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        check:
+          - name: Lint
+            run: 'yarn lint'
+          - name: Type-check
+            run: 'yarn type-check'
+          - name: Format
+            run: 'yarn format:check'
+          - name: Build
+            run: 'yarn build'
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: ${{ matrix.check.name }}
+        run: ${{ matrix.check.run }}

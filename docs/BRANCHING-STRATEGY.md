@@ -12,10 +12,22 @@
 
 1. Branch from `development`, e.g. `git switch -c feat/home-hero development`.
 2. Write commits in the Conventional Commits format, which commitlint enforces: `feat: add hero slider`, `fix(header): close mobile menu on navigate`.
-3. Open a PR into `development`. CI must pass (malware scan, lint, type-check, format and build).
+3. Open a PR into `development`. PR checks must pass (malware scan, lint, type-check, format and build).
+   It runs only on pull requests, not again after the merge.
 4. To release, open a PR from `development` into `main`.
 
-Don't force-push to `main` or `development`. Protect both branches on GitHub so a PR and passing CI are required.
+Don't force-push to `main` or `development`. Protect both branches on GitHub so a PR and passing PR checks are required.
+
+## PR checks
+
+`.github/workflows/pr-checks.yml` (shown as **PR checks (scan & verify)** in GitHub) is a single workflow. It runs on every pull request into `development` or `main`, and it can also be started by hand from the Actions tab.
+
+| Stage | Check                                   | Runs                                         |
+| ----- | --------------------------------------- | -------------------------------------------- |
+| 1     | `Malware scan`                          | First, before any dependencies are installed |
+| 2     | `Lint`, `Type-check`, `Format`, `Build` | In parallel, once the scan passes            |
+
+Each check is reported separately on the PR. Mark all five as required status checks in branch protection.
 
 ## Git hooks (Husky)
 
