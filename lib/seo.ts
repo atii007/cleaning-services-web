@@ -4,11 +4,6 @@ import { env } from '@/lib/env'
 export const absoluteUrl = (path = '/'): string =>
   new URL(path, env.NEXT_PUBLIC_SITE_URL).toString()
 
-export const getWhatsAppUrl = (
-  message = 'Hi, I would like to know more about your services.'
-): string =>
-  `https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(message)}`
-
 /** schema.org LocalBusiness JSON-LD for the root layout. */
 export const getLocalBusinessJsonLd = () => ({
   '@context': 'https://schema.org',
@@ -35,3 +30,17 @@ export const getLocalBusinessJsonLd = () => ({
  */
 export const serializeJsonLd = (data: unknown): string =>
   JSON.stringify(data).replace(/</g, '\\u003c')
+
+/** schema.org BreadcrumbList JSON-LD for a breadcrumb trail. */
+export const getBreadcrumbJsonLd = (
+  trail: readonly { label: string; href: string }[]
+) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: trail.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    item: absoluteUrl(item.href),
+  })),
+})
