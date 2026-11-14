@@ -8,6 +8,8 @@ type CtaBandProps = {
   eyebrow?: string
   title?: string
   description?: string
+  /** Passed to the quote button, e.g. `#contact` for a same-page form. */
+  quoteHref?: string
   className?: string
 }
 
@@ -16,6 +18,7 @@ export const CtaBand = ({
   eyebrow = CTA_BAND.eyebrow,
   title = CTA_BAND.title,
   description = CTA_BAND.description,
+  quoteHref,
   className,
 }: CtaBandProps) => (
   <section
@@ -43,7 +46,7 @@ export const CtaBand = ({
         align="start"
         inverse
       />
-      <ContactActions inverse className="shrink-0" />
+      <ContactActions inverse quoteHref={quoteHref} className="shrink-0" />
     </div>
   </section>
 )

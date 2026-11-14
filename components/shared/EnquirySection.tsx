@@ -1,30 +1,47 @@
+import { cn } from 'cn'
 import { ClockIcon, MailIcon, MapPinIcon, PhoneIcon } from 'lucide-react'
 import { FaWhatsapp } from 'react-icons/fa6'
 
+import { EnquiryForm } from '@/components/shared/EnquiryForm'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { getSocialLabel, SocialIcon } from '@/components/shared/SocialIcon'
-import { CONTACT_PANEL, CONTACT_SECTION } from '@/content/home'
+import { CONTACT_PANEL, CONTACT_SECTION } from '@/content/contact'
 import { SITE_CONFIG } from '@/content/site'
 import { getTelHref, getWhatsAppUrl } from '@/lib/contact'
-import { EnquiryForm } from '@/sections/home/EnquiryForm'
 
 const ROW_CLASS =
   'flex items-start gap-3 rounded-xl p-2 -mx-2 transition-colors hover:bg-overlay-foreground/5'
 
-export const ContactSection = () => {
+type EnquirySectionProps = {
+  /** Preselects a service slug in the form. */
+  defaultService?: string
+  /** Overrides the default section heading. */
+  title?: string
+  className?: string
+}
+
+/**
+ * Contact panel + WhatsApp enquiry form. Renders with `id="contact"`, the
+ * target of every "Get a free quote" link on the page.
+ */
+export const EnquirySection = ({
+  defaultService,
+  title = CONTACT_SECTION.title,
+  className,
+}: EnquirySectionProps) => {
   const { contact, socials } = SITE_CONFIG
 
   return (
     <section
       id="contact"
-      className="scroll-mt-20 section"
+      className={cn('scroll-mt-20 section', className)}
       aria-labelledby="contact-heading"
     >
       <div className="container-page">
         <SectionHeading
           id="contact-heading"
           eyebrow={CONTACT_SECTION.eyebrow}
-          title={CONTACT_SECTION.title}
+          title={title}
           description={CONTACT_SECTION.description}
         />
 
@@ -129,7 +146,7 @@ export const ContactSection = () => {
           </aside>
 
           <div className="lg:col-span-3">
-            <EnquiryForm />
+            <EnquiryForm defaultService={defaultService} />
           </div>
         </div>
       </div>

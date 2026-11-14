@@ -1,4 +1,6 @@
-export type ServiceIconName = 'sparkles' | 'house' | 'shield'
+import type { IconName } from '@/lib/icons'
+
+export type { IconName }
 
 export type ImageAsset = {
   src: string
@@ -7,14 +9,81 @@ export type ImageAsset = {
   height: number
 }
 
+export type SubService = {
+  /** Reserved for the sub-service page route (Phase 4). */
+  slug: string
+  title: string
+  summary: string
+  icon: IconName
+  /** Starting price, in the site currency. Omit to hide the price. */
+  priceFrom?: number
+}
+
+export type ContentBlock = {
+  title: string
+  paragraphs: string[]
+  bullets?: string[]
+  image?: ImageAsset
+}
+
+export type ServicePlan = {
+  name: string
+  /** In the site currency. */
+  price: number
+  /** Free text shown after the price, e.g. "per visit" or "/month". */
+  unit: string
+  description?: string
+  popular?: boolean
+}
+
+/**
+ * One comparison row. `values` has one entry per plan, in plan order:
+ * `true` = included, `false` = not included, string = short custom value.
+ */
+export type PlanFeature = {
+  label: string
+  values: (boolean | string)[]
+}
+
+export type Benefit = {
+  icon: IconName
+  title: string
+  description: string
+}
+
+export type Faq = {
+  question: string
+  answer: string
+}
+
+/**
+ * A service category: its card/nav summary plus its page. Every page
+ * section is optional — the template renders only what is provided.
+ */
 export type ServiceCategory = {
   slug: string
   title: string
   /** One-line teaser used in menus. */
   tagline: string
+  /** Card text on the home and /services pages. */
   summary: string
-  icon: ServiceIconName
+  icon: IconName
   image: ImageAsset
+  /** Page-level SEO description; falls back to `summary`. */
+  metaDescription?: string
+  hero?: { eyebrow?: string; description: string }
+  intro?: {
+    title: string
+    paragraphs: string[]
+    bullets?: string[]
+    image?: ImageAsset
+  }
+  subServices?: SubService[]
+  blocks?: ContentBlock[]
+  plans?: ServicePlan[]
+  planFeatures?: PlanFeature[]
+  benefits?: Benefit[]
+  faqs?: Faq[]
 }
 
 export type CtaLink = {
@@ -62,10 +131,8 @@ export type Stat = {
   decimals?: number
 }
 
-export type TrustPointIcon = 'shield' | 'leaf' | 'clock' | 'thumbs-up'
-
 export type TrustPoint = {
-  icon: TrustPointIcon
+  icon: IconName
   title: string
   description: string
 }
@@ -90,19 +157,9 @@ export type Testimonial = {
   quote: string
 }
 
-export type ClientLogoIcon =
-  | 'building'
-  | 'hotel'
-  | 'hospital'
-  | 'school'
-  | 'store'
-  | 'factory'
-  | 'landmark'
-  | 'warehouse'
-
 export type ClientLogo = {
   name: string
-  icon: ClientLogoIcon
+  icon: IconName
 }
 
 export type BlogPost = {

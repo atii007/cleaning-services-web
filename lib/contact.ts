@@ -31,3 +31,7 @@ export const buildEnquiryMessage = (values: EnquiryValues): string => {
   ]
   return lines.filter((line) => line !== null).join('\n')
 }
+
+/** WhatsApp message for booking one specific sub-service. */
+export const getBookingMessage = (category: string, subService: string) =>
+  `Hi ${SITE_CONFIG.shortName}, I'd like to book ${subService} (${category}). Please share availability and pricing.`

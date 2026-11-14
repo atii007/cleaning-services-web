@@ -71,6 +71,7 @@ export const SITE_CONFIG = {
       { label: 'Terms & Conditions', href: '/terms' },
     ],
   },
+  currency: { code: 'USD', locale: 'en-US' },
   certifications: [
     { name: 'ISO 9001', issuer: 'Quality management', icon: 'award' },
     { name: 'ISO 14001', issuer: 'Environmental management', icon: 'leaf' },

@@ -43,6 +43,7 @@ yarn dev                     # http://localhost:3000
 - [Always-apply rules](docs/agent/ALWAYS-APPLY-RULES.md)
 - [Code best practices and folder map](docs/CODE-BEST-PRACTICES.md)
 - [Branching strategy and git hooks](docs/BRANCHING-STRATEGY.md)
+- [Content guide: replacing placeholder data](docs/CONTENT-GUIDE.md)
 
 ## Deployment (Vercel)
 

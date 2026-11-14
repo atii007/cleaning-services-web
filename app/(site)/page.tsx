@@ -1,6 +1,6 @@
+import { EnquirySection } from '@/components/shared/EnquirySection'
 import { BeforeAfter } from '@/sections/home/BeforeAfter'
 import { ClientLogos } from '@/sections/home/ClientLogos'
-import { ContactSection } from '@/sections/home/ContactSection'
 import { HeroSlider } from '@/sections/home/HeroSlider'
 import { LatestPosts } from '@/sections/home/LatestPosts'
 import { ServicesOverview } from '@/sections/home/ServicesOverview'
@@ -16,7 +16,7 @@ export default function HomePage() {
       <BeforeAfter />
       <Testimonials />
       <ClientLogos />
-      <ContactSection />
+      <EnquirySection />
       <LatestPosts />
     </>
   )
