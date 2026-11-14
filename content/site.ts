@@ -1,4 +1,5 @@
 import { PLACEHOLDER_IMAGES } from '@/content/images'
+import { POLICY_NAV_ITEMS } from '@/content/policies'
 import { SERVICE_NAV_ITEMS } from '@/content/services'
 import type { SiteConfig } from '@/types/site'
 
@@ -30,7 +31,7 @@ export const SITE_CONFIG = {
     availability: 'Always online — book any time, day or night',
   },
   ctas: {
-    quote: { label: 'Get a free quote', href: '/#contact' },
+    quote: { label: 'Get a free quote', href: '/contact' },
     call: 'Call us',
     whatsapp: 'WhatsApp us',
   },
@@ -52,7 +53,7 @@ export const SITE_CONFIG = {
         description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tell us about your space.',
         image: PLACEHOLDER_IMAGES.bathroom,
-        cta: { label: 'Get a free quote', href: '/#contact' },
+        cta: { label: 'Get a free quote', href: '/contact' },
       },
     },
     { label: 'Blog', href: '/blog' },
@@ -65,11 +66,7 @@ export const SITE_CONFIG = {
       { label: 'Blog', href: '/blog' },
       { label: 'Contact', href: '/contact' },
     ],
-    legal: [
-      { label: 'Privacy Policy', href: '/privacy-policy' },
-      { label: 'Refund Policy', href: '/refund-policy' },
-      { label: 'Terms & Conditions', href: '/terms' },
-    ],
+    legal: POLICY_NAV_ITEMS,
   },
   currency: { code: 'USD', locale: 'en-US' },
   certifications: [

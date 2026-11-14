@@ -17,6 +17,8 @@ type EnquirySectionProps = {
   defaultService?: string
   /** Prefills the area field in the form. */
   defaultArea?: string
+  /** Offers "Send by email" next to WhatsApp (Contact page only). */
+  allowEmail?: boolean
   /** Overrides the default section heading. */
   title?: string
   className?: string
@@ -29,6 +31,7 @@ type EnquirySectionProps = {
 export const EnquirySection = ({
   defaultService,
   defaultArea,
+  allowEmail = false,
   title = CONTACT_SECTION.title,
   className,
 }: EnquirySectionProps) => {
@@ -152,6 +155,7 @@ export const EnquirySection = ({
             <EnquiryForm
               defaultService={defaultService}
               defaultArea={defaultArea}
+              allowEmail={allowEmail}
             />
           </div>
         </div>

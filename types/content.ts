@@ -176,13 +176,83 @@ export type ClientLogo = {
   icon: IconName
 }
 
+/** One block of an article body. Rendered in order by `BlogBody`. */
+export type BlogBlock =
+  | { type: 'heading'; text: string }
+  | { type: 'paragraph'; text: string }
+  | { type: 'list'; items: string[]; ordered?: boolean }
+  | { type: 'image'; image: ImageAsset; caption?: string }
+  | { type: 'quote'; text: string; cite?: string }
+  | { type: 'callout'; title?: string; text: string }
+
+export type BlogAuthor = {
+  name: string
+  role?: string
+}
+
 export type BlogPost = {
   slug: string
   title: string
   excerpt: string
   /** ISO date, e.g. 2026-10-02 */
   publishedAt: string
+  /** ISO date of the last meaningful edit. */
+  updatedAt?: string
   readMinutes: number
   category: string
   image: ImageAsset
+  author?: BlogAuthor
+  tags?: string[]
+  /** Service category slugs shown as "Related services" under the article. */
+  relatedServices?: string[]
+  body: BlogBlock[]
+}
+
+/** A post without its body — enough for cards and lists. */
+export type BlogPostSummary = Omit<BlogPost, 'body'>
+
+export type AboutCard = {
+  icon: IconName
+  title: string
+  description: string
+}
+
+export type Milestone = {
+  /** Free text, e.g. "2014" or "Spring 2020". */
+  year: string
+  title: string
+  description: string
+}
+
+export type TeamMember = {
+  name: string
+  role: string
+  image?: ImageAsset
+}
+
+export type PolicySection = {
+  heading: string
+  paragraphs: string[]
+  bullets?: string[]
+}
+
+export type Policy = {
+  /** Top-level URL segment: /<slug>. */
+  slug: string
+  title: string
+  /** Short footer label; falls back to `title`. */
+  navLabel?: string
+  metaDescription: string
+  /** ISO date. */
+  updatedAt: string
+  intro?: string
+  sections: PolicySection[]
+}
+
+export type MapEmbed = {
+  title: string
+  /** Google Maps embed URL (must be on an origin allowed by the CSP frame-src). */
+  embedUrl: string
+  /** Normal Google Maps link for "Open in Google Maps". */
+  linkUrl: string
 }

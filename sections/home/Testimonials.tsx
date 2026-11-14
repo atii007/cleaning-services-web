@@ -16,15 +16,9 @@ import {
 import { TESTIMONIALS_SECTION } from '@/content/home'
 import { TESTIMONIALS } from '@/content/testimonials'
 import { useAutoplay, useCarouselIndex } from '@/hooks/useAutoplay'
+import { getInitials } from '@/lib/format'
 
 const MAX_RATING = 5
-
-const getInitials = (name: string) =>
-  name
-    .split(' ')
-    .map((part) => part.charAt(0))
-    .join('')
-    .slice(0, 2)
 
 const Stars = ({ rating }: { rating: number }) => (
   <div
@@ -45,13 +39,16 @@ const Stars = ({ rating }: { rating: number }) => (
   </div>
 )
 
-export const Testimonials = () => {
+export const Testimonials = ({ className }: { className?: string }) => {
   const [api, setApi] = React.useState<CarouselApi>()
   const autoplay = useAutoplay(api, { delay: 7000 })
   const { selected, count } = useCarouselIndex(api, TESTIMONIALS.length)
 
   return (
-    <section className="section" aria-labelledby="testimonials-heading">
+    <section
+      className={cn('section', className)}
+      aria-labelledby="testimonials-heading"
+    >
       <div className="container-page">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <SectionHeading

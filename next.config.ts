@@ -15,6 +15,8 @@ const contentSecurityPolicy = [
   "img-src 'self' blob: data: https://images.unsplash.com",
   "font-src 'self'",
   "connect-src 'self'",
+  // Google Maps embed on /contact (content/contact.ts → CONTACT_MAP).
+  'frame-src https://www.google.com',
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
