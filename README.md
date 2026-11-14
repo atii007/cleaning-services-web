@@ -26,6 +26,17 @@ cp .env.example .env.local
 yarn dev                     # http://localhost:3000
 ```
 
+## Environment variables
+
+All variables are validated in `lib/env.ts`, and `.env.example` documents each one.
+
+| Variable                                                                                                 | Required | Purpose                                                                                                       |
+| -------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`                                                                                   | Yes\*    | Canonical URL for metadata, sitemap and robots. \*On Vercel it falls back to the production URL.              |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM`, `CONTACT_FORM_RECIPIENT` | No       | Turn on the "Send by email" option on `/contact`. Set all of them, or none. The build fails on a partial set. |
+
+The Contact page is prerendered, so after adding or changing the SMTP variables on Vercel, **redeploy** for the email button to appear.
+
 ## Scripts
 
 | Script                              | Does                                           |

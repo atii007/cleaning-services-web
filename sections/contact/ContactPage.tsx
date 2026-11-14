@@ -3,6 +3,7 @@ import { CtaBand } from '@/components/shared/CtaBand'
 import { EnquirySection } from '@/components/shared/EnquirySection'
 import { PageHero } from '@/components/shared/PageHero'
 import { CONTACT_FAQS, CONTACT_MAP, CONTACT_PAGE } from '@/content/contact'
+import { isEmailConfigured } from '@/lib/mail'
 import { ContactMap } from '@/sections/contact/ContactMap'
 import { ServiceFaq } from '@/sections/services/ServiceFaq'
 
@@ -17,7 +18,7 @@ export const ContactPage = () => (
       breadcrumbs={[{ label: CONTACT_PAGE.title, href: '/contact' }]}
       actions={<ContactActions actions={['whatsapp', 'call']} inverse />}
     />
-    <EnquirySection />
+    <EnquirySection allowEmail={isEmailConfigured()} />
     {CONTACT_MAP ? (
       <ContactMap map={CONTACT_MAP} className="bg-surface" />
     ) : null}

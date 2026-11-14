@@ -13,7 +13,7 @@ export const getWhatsAppUrl = (
 
 export const getTelHref = (tel: string): string => `tel:${tel}`
 
-const getServiceLabel = (value: string): string =>
+export const getServiceLabel = (value: string): string =>
   SERVICE_CATEGORIES.find((service) => service.slug === value)?.title ??
   'Other / not sure'
 
@@ -24,6 +24,7 @@ export const buildEnquiryMessage = (values: EnquiryValues): string => {
     '',
     `Name: ${values.name}`,
     `Phone: ${values.phone}`,
+    values.email ? `Email: ${values.email}` : null,
     `Service: ${getServiceLabel(values.service)}`,
     values.area ? `Area: ${values.area}` : null,
     values.preferredDate ? `Preferred date: ${values.preferredDate}` : null,

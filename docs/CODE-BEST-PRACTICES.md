@@ -46,7 +46,8 @@ ESLint and Prettier enforce most of these automatically. The rest are convention
 | `components/layout/`    | TopBar, Header, MainNav, MobileNav, Footer                                 |
 | `components/providers/` | Client context providers                                                   |
 | `content/`              | Typed placeholder content and site config                                  |
-| `lib/`                  | `env`, `seo` and `utils` helpers                                           |
+| `lib/`                  | `env`, `seo`, `mail`, `rate-limit` and `utils` helpers                     |
+| `actions/`              | Server Actions (`'use server'`), e.g. `actions/enquiry.ts`                 |
 | `schemas/`              | Zod schemas (forms, server actions)                                        |
 | `types/`                | Shared TypeScript types                                                    |
 | `hooks/`                | Reusable client hooks                                                      |
