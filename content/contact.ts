@@ -15,6 +15,7 @@ export const ENQUIRY_FORM = {
   fields: {
     name: { label: 'Full name', placeholder: 'Your name' },
     phone: { label: 'Phone / WhatsApp', placeholder: '+971 50 000 0000' },
+    email: { label: 'Email', placeholder: 'you@example.com' },
     service: { label: 'Service', placeholder: 'Choose a service' },
     area: { label: 'Area', placeholder: 'e.g. Al Reem Island' },
     preferredDate: { label: 'Preferred date' },
@@ -29,6 +30,28 @@ export const ENQUIRY_FORM = {
   note: 'Sending opens WhatsApp with your request ready — just tap send.',
   callPrompt: 'Prefer to talk?',
   success: 'WhatsApp opened — tap send and we will reply shortly.',
+  /** Shown only on the Contact page, when email sending is configured. */
+  email: {
+    submit: 'Send by email',
+    choose: 'Choose how to send your request',
+    note: 'WhatsApp is fastest. Email replies usually arrive within one working day.',
+    sending: 'Sending…',
+    successTitle: 'Thanks — your request has been sent',
+    successText:
+      'We will reply by phone or email, usually within one working day.',
+    sendAnother: 'Send another request',
+    alsoWhatsApp: 'Need it sooner? Chat on WhatsApp',
+    whatsAppInstead: 'Send on WhatsApp instead',
+    honeypotLabel: 'Leave this field empty',
+    errors: {
+      unavailable: 'Email is not available right now. Please use WhatsApp.',
+      invalid: 'Please check the form and try again.',
+      tooFast: 'That was quick! Please wait a moment and try again.',
+      rateLimited:
+        'Too many requests from your connection. Please try again later or use WhatsApp.',
+      failed: 'We could not send your email. Please use WhatsApp instead.',
+    },
+  },
 } as const
 
 export const CONTACT_PANEL = {

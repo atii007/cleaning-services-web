@@ -144,7 +144,7 @@ export const Footer = () => {
       <Certifications />
 
       <div className="border-t border-inverse-muted-foreground/15">
-        <div className="container-page flex flex-col items-center justify-between gap-3 py-6 pb-24 text-xs sm:flex-row sm:pe-24 sm:pb-6">
+        <div className="container-page flex flex-col items-center justify-between gap-3 py-6 pb-36 text-xs sm:flex-row sm:pe-24 sm:pb-6">
           <p>
             © <CopyrightYear /> {SITE_CONFIG.name}. All rights reserved.
           </p>

@@ -10,8 +10,8 @@ const SERVICE_VALUES = [
 ]
 
 /**
- * Enquiry form. Shared by the client form (react-hook-form) and, from
- * Phase 6, any server action that also emails the enquiry.
+ * Enquiry form. Shared by the client form (react-hook-form) and the server
+ * action that emails an enquiry from the Contact page.
  */
 export const enquirySchema = z.object({
   name: z
@@ -23,6 +23,11 @@ export const enquirySchema = z.object({
     .string()
     .trim()
     .regex(/^\+?[\d\s()-]{7,20}$/, 'Enter a valid phone number'),
+  /** Optional; used as the reply-to address on emailed enquiries. */
+  email: z.union([
+    z.literal(''),
+    z.email('Enter a valid email address').trim().max(120),
+  ]),
   service: z.enum(SERVICE_VALUES, { error: 'Choose a service' }),
   area: z.string().trim().max(80, 'Keep the area under 80 characters'),
   preferredDate: z.string().trim(),
@@ -30,3 +35,15 @@ export const enquirySchema = z.object({
 })
 
 export type EnquiryValues = z.infer<typeof enquirySchema>
+
+/** Anti-spam fields sent alongside an emailed enquiry. */
+export const enquirySpamSchema = z.object({
+  /** Honeypot: hidden from people, so any value means a bot. */
+  website: z.string().max(200),
+  /** `Date.now()` when the form was rendered. */
+  startedAt: z.number().int().nonnegative(),
+  /** Path of the page the enquiry was sent from. */
+  page: z.string().max(200),
+})
+
+export type EnquirySpamValues = z.infer<typeof enquirySpamSchema>
