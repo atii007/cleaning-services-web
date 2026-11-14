@@ -51,4 +51,4 @@ ESLint and Prettier enforce most of these automatically. The rest are convention
 | `types/`                | Shared TypeScript types                                                    |
 | `hooks/`                | Reusable client hooks                                                      |
 | `constants/`            | Non-content constants                                                      |
-| `scripts/security/`     | Malware scanner used by Husky and CI                                       |
+| `scripts/security/`     | Malware scanner used by Husky and PR checks                                |
