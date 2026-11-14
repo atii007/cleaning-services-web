@@ -37,6 +37,21 @@ export const MAID_SERVICES: ServiceCategory = {
       summary: LOREM,
       icon: 'timer',
       priceFrom: 9,
+      detail: {
+        description: [LOREM_LONG, LOREM],
+        included: [
+          'Dusting and vacuuming',
+          'Kitchen and bathroom wipe-down',
+          'Bed making and tidying',
+          'Ironing on request',
+        ],
+        image: PLACEHOLDER_IMAGES.yellowChair,
+        faqs: [
+          { question: 'How long does it take?', answer: LOREM },
+          { question: 'What do I need to prepare?', answer: LOREM_LONG },
+          { question: 'Is it safe for children and pets?', answer: LOREM },
+        ],
+      },
     },
     {
       slug: 'part-time-maid',
@@ -51,6 +66,15 @@ export const MAID_SERVICES: ServiceCategory = {
       summary: LOREM,
       icon: 'calendar',
       priceFrom: 450,
+      detail: {
+        description: [LOREM_LONG, LOREM],
+        included: [
+          'Same maid every visit',
+          'Fixed weekly schedule',
+          'Free replacement if needed',
+          'Simple monthly billing',
+        ],
+      },
     },
     {
       slug: 'babysitting',

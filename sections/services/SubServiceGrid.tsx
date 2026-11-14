@@ -1,4 +1,6 @@
+import Link from 'next/link'
 import { cn } from 'cn'
+import { ArrowRightIcon } from 'lucide-react'
 import { FaWhatsapp } from 'react-icons/fa6'
 
 import { Icon } from '@/components/shared/Icon'
@@ -6,12 +8,16 @@ import { Reveal } from '@/components/shared/Reveal'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Button } from '@/components/ui/button'
 import { SERVICE_PAGE_COPY } from '@/content/service-page'
+import { getSubServiceHref } from '@/content/services'
 import { getBookingMessage, getWhatsAppUrl } from '@/lib/contact'
 import { formatPrice } from '@/lib/format'
 import type { SubService } from '@/types/content'
 
 type SubServiceGridProps = {
+  serviceSlug: string
   serviceTitle: string
+  /** Overrides the default heading, e.g. on a sub-service page. */
+  title?: string
   items: SubService[]
   className?: string
 }
@@ -20,7 +26,9 @@ const COPY = SERVICE_PAGE_COPY.subServices
 
 /** One card per sub-service, each with a WhatsApp "Book now". */
 export const SubServiceGrid = ({
+  serviceSlug,
   serviceTitle,
+  title,
   items,
   className,
 }: SubServiceGridProps) => (
@@ -32,7 +40,7 @@ export const SubServiceGrid = ({
       <SectionHeading
         id="sub-services-heading"
         eyebrow={COPY.eyebrow}
-        title={COPY.title(serviceTitle)}
+        title={title ?? COPY.title(serviceTitle)}
       />
       <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item, index) => (
@@ -54,10 +62,34 @@ export const SubServiceGrid = ({
                     </p>
                   ) : null}
                 </div>
-                <h3 className="mt-5 text-lg font-bold">{item.title}</h3>
+                <h3 className="mt-5 text-lg font-bold">
+                  {item.detail ? (
+                    <Link
+                      href={getSubServiceHref(serviceSlug, item.slug)}
+                      className="hover:text-primary"
+                    >
+                      {item.title}
+                    </Link>
+                  ) : (
+                    item.title
+                  )}
+                </h3>
                 <p className="mt-2 flex-1 text-sm text-muted-foreground">
                   {item.summary}
                 </p>
+                {item.detail ? (
+                  <Link
+                    href={getSubServiceHref(serviceSlug, item.slug)}
+                    className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary-dark"
+                  >
+                    {SERVICE_PAGE_COPY.learnMore}
+                    <span className="sr-only"> about {item.title}</span>
+                    <ArrowRightIcon
+                      className="size-4 rtl:rotate-180"
+                      aria-hidden
+                    />
+                  </Link>
+                ) : null}
                 <Button
                   asChild
                   size="lg"
