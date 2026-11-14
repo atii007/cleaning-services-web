@@ -6,11 +6,21 @@ import { ArrowRightIcon } from 'lucide-react'
 import { Icon } from '@/components/shared/Icon'
 import { Reveal } from '@/components/shared/Reveal'
 import { getServiceHref, SERVICE_CATEGORIES } from '@/content/services'
+import type { ServiceCategory } from '@/types/content'
+
+type ServiceCategoryGridProps = {
+  /** Defaults to every category. */
+  services?: readonly ServiceCategory[]
+  className?: string
+}
 
 /** Card per service category — renders however many categories exist. */
-export const ServiceCategoryGrid = ({ className }: { className?: string }) => (
+export const ServiceCategoryGrid = ({
+  services = SERVICE_CATEGORIES,
+  className,
+}: ServiceCategoryGridProps) => (
   <ul className={cn('grid gap-6 sm:grid-cols-2 lg:grid-cols-3', className)}>
-    {SERVICE_CATEGORIES.map((service, index) => (
+    {services.map((service, index) => (
       <li key={service.slug}>
         <Reveal delay={index * 0.1} className="h-full">
           <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow hover:shadow-xl hover:shadow-heading/5">

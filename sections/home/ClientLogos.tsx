@@ -1,3 +1,5 @@
+import { cn } from 'cn'
+
 import { Icon } from '@/components/shared/Icon'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { CLIENT_LOGOS } from '@/content/clients'
@@ -32,8 +34,11 @@ const LogoList = ({ hidden = false }: { hidden?: boolean }) => (
  * Infinite logo marquee: the list is rendered twice and the track slides by
  * half its width. Reduced motion shows a single, wrapped, static list.
  */
-export const ClientLogos = () => (
-  <section className="bg-surface section-sm" aria-labelledby="clients-heading">
+export const ClientLogos = ({ className }: { className?: string }) => (
+  <section
+    className={cn('section-sm', className)}
+    aria-labelledby="clients-heading"
+  >
     <div className="container-page">
       <SectionHeading
         id="clients-heading"

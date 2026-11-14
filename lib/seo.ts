@@ -2,7 +2,7 @@ import { SERVICE_AREAS } from '@/content/areas'
 import { getServiceHref } from '@/content/services'
 import { SITE_CONFIG } from '@/content/site'
 import { env } from '@/lib/env'
-import type { ServiceCategory } from '@/types/content'
+import type { BlogPost, ServiceCategory } from '@/types/content'
 
 export const absoluteUrl = (path = '/'): string =>
   new URL(path, env.NEXT_PUBLIC_SITE_URL).toString()
@@ -93,3 +93,27 @@ export const getServiceJsonLd = (
       : {}),
   }
 }
+
+/** schema.org BlogPosting JSON-LD for an article page. */
+export const getArticleJsonLd = (post: BlogPost, path: string) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: post.excerpt,
+  image: [post.image.src],
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt ?? post.publishedAt,
+  articleSection: post.category,
+  ...(post.tags && post.tags.length > 0
+    ? { keywords: post.tags.join(', ') }
+    : {}),
+  mainEntityOfPage: { '@type': 'WebPage', '@id': absoluteUrl(path) },
+  author: post.author
+    ? { '@type': 'Person', name: post.author.name }
+    : { '@type': 'Organization', name: SITE_CONFIG.name },
+  publisher: {
+    '@type': 'Organization',
+    name: SITE_CONFIG.name,
+    url: absoluteUrl('/'),
+  },
+})

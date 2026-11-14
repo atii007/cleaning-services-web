@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { ClockIcon, MailIcon, MapPinIcon, PhoneIcon } from 'lucide-react'
 import type * as React from 'react'
 
-import { Icon } from '@/components/shared/Icon'
+import { CertificationList } from '@/components/shared/CertificationList'
 import { Logo } from '@/components/shared/Logo'
 import { getSocialLabel, SocialIcon } from '@/components/shared/SocialIcon'
 import { SITE_CONFIG } from '@/content/site'
@@ -43,26 +43,7 @@ const Certifications = () => (
   <div className="border-t border-inverse-muted-foreground/15">
     <div className="container-page py-10">
       <FooterHeading>Licensed &amp; certified</FooterHeading>
-      <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-6">
-        {SITE_CONFIG.certifications.map((certification) => {
-          return (
-            <li
-              key={certification.name}
-              className="flex items-center gap-3 rounded-xl border border-inverse-muted-foreground/15 p-3 transition-colors hover:border-primary/60"
-            >
-              <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary-light">
-                <Icon name={certification.icon} className="size-5" />
-              </span>
-              <span className="flex min-w-0 flex-col">
-                <span className="text-sm font-semibold text-inverse-foreground">
-                  {certification.name}
-                </span>
-                <span className="text-xs">{certification.issuer}</span>
-              </span>
-            </li>
-          )
-        })}
-      </ul>
+      <CertificationList inverse className="mt-6" />
     </div>
   </div>
 )
@@ -167,20 +148,22 @@ export const Footer = () => {
           <p>
             © <CopyrightYear /> {SITE_CONFIG.name}. All rights reserved.
           </p>
-          <nav aria-label="Legal">
-            <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2">
-              {footerNav.legal.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="transition-colors hover:text-primary-light"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          {footerNav.legal.length > 0 ? (
+            <nav aria-label="Legal">
+              <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2">
+                {footerNav.legal.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="transition-colors hover:text-primary-light"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ) : null}
         </div>
       </div>
     </footer>
