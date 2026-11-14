@@ -15,7 +15,7 @@ export default function HomePage() {
       <WhyChooseUs />
       <BeforeAfter />
       <Testimonials />
-      <ClientLogos />
+      <ClientLogos className="bg-surface" />
       <EnquirySection />
       <LatestPosts />
     </>

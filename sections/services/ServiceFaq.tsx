@@ -9,24 +9,30 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { SERVICE_PAGE_COPY } from '@/content/service-page'
-import type { Faq } from '@/types/content'
+import type { Faq, SectionCopy } from '@/types/content'
 
 type ServiceFaqProps = {
   faqs: Faq[]
+  /** Overrides the default FAQ heading copy. */
+  heading?: SectionCopy
   className?: string
 }
 
 const COPY = SERVICE_PAGE_COPY.faqs
 
-export const ServiceFaq = ({ faqs, className }: ServiceFaqProps) => (
+export const ServiceFaq = ({
+  faqs,
+  heading = COPY,
+  className,
+}: ServiceFaqProps) => (
   <section className={cn('section', className)} aria-labelledby="faq-heading">
     <div className="container-page grid gap-10 lg:grid-cols-[2fr_3fr] lg:gap-16">
       <div className="lg:sticky lg:top-28 lg:self-start">
         <SectionHeading
           id="faq-heading"
-          eyebrow={COPY.eyebrow}
-          title={COPY.title}
-          description={COPY.description}
+          eyebrow={heading.eyebrow}
+          title={heading.title}
+          description={heading.description}
           align="start"
         />
         <ContactActions actions={['whatsapp']} className="mt-6" />

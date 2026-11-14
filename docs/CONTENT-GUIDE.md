@@ -11,14 +11,17 @@ After any change, run `yarn check && yarn build`. TypeScript flags a missing req
 | Business name, phones, WhatsApp, address, hours, socials | `content/site.ts`                                  |
 | Currency                                                 | `content/site.ts` → `currency`                     |
 | Main nav and footer links                                | `content/site.ts`                                  |
-| Certifications (footer)                                  | `content/site.ts`                                  |
+| Certifications (footer and About page)                   | `content/site.ts`                                  |
 | Services, one file per category                          | `content/services/<slug>.ts`                       |
 | Service order (and which services exist)                 | `content/services/index.ts`                        |
 | Areas served                                             | `content/areas.ts`                                 |
 | Home page copy, stats and trust points                   | `content/home.ts`                                  |
 | Before/after gallery                                     | `content/gallery.ts`                               |
 | Testimonials, client logos, blog posts                   | `content/testimonials.ts`, `clients.ts`, `blog.ts` |
-| Contact form and contact panel copy                      | `content/contact.ts`                               |
+| Contact form, contact panel, /contact page, map and FAQs | `content/contact.ts`                               |
+| About page                                               | `content/about.ts`                                 |
+| Blog index and article page copy                         | `content/blog-page.ts`                             |
+| Policy pages (privacy, refund, terms…)                   | `content/policies.ts`                              |
 | Service page headings ("Our … services", FAQ, plans…)    | `content/service-page.ts`                          |
 | Promo popup                                              | `content/promo.ts`                                 |
 | Images                                                   | `content/images.ts`                                |
@@ -116,6 +119,45 @@ Icon fields take a name from `lib/icons.ts`, for example `'bug'`, `'sofa'` or `'
 - **Area page text** comes from the templates in `content/service-page.ts` (`area.*`), with the service and area names filled in. Everything else on the page comes from the service's own content: sub-services, plans, benefits and FAQs.
 
 Renaming an area changes its URL. Once the site is live, add a redirect in `next.config.ts` for the old URL.
+
+## Blog
+
+Posts live in `content/blog.ts` as `BLOG_POSTS`. Order does not matter: lists are always sorted newest first by `publishedAt` (an ISO date such as `2026-10-28`). Each post gets a page at `/blog/<slug>`, a card on `/blog`, and a sitemap entry. The newest three also appear on the home page.
+
+- **Required:** `slug`, `title`, `excerpt`, `publishedAt`, `readMinutes`, `category`, `image` and `body`.
+- **Optional:** `updatedAt`, `author` (`{ name, role? }`), `tags`, and `relatedServices` (service slugs shown as cards under the article; unknown slugs are ignored).
+- **Categories** come from the posts themselves. The filter chips on `/blog` appear once there are at least two.
+- **The body** is a list of blocks, rendered in order:
+
+| Block       | Fields                                   |
+| ----------- | ---------------------------------------- |
+| `heading`   | `text` (a section heading)               |
+| `paragraph` | `text`                                   |
+| `list`      | `items`, `ordered?` (numbered when true) |
+| `image`     | `image`, `caption?`                      |
+| `quote`     | `text`, `cite?`                          |
+| `callout`   | `text`, `title?` (a highlighted tip box) |
+
+With no posts at all, `/blog` shows an empty message and the home page hides its blog section.
+
+## About page
+
+`content/about.ts` holds the story, mission and vision, values, milestones and team. Every section is optional: an empty list (or empty story paragraphs) removes that section. Team members without an `image` show their initials. The stats, certifications, testimonials and client logos are reused from `content/home.ts`, `content/site.ts`, `content/testimonials.ts` and `content/clients.ts`.
+
+## Contact page
+
+`/contact` shows the enquiry form and contact panel, then the map and FAQs from `content/contact.ts`.
+
+- **Map:** `CONTACT_MAP` takes a Google Maps `embedUrl` and a normal `linkUrl`. Set it to `undefined` to hide the map. An embed from another host also needs that host in the CSP `frame-src` in `next.config.ts`.
+- **FAQs:** `CONTACT_FAQS`. An empty list hides the section.
+
+## Policies
+
+`content/policies.ts` lists the legal pages. Each one is served at the top level, `/<slug>` (for example `/privacy-policy`), and the footer's legal links are built from the same list, so adding or removing a policy needs no other change. Each policy has a `title`, `metaDescription`, `updatedAt`, an optional `intro`, an optional short `navLabel` for the footer, and `sections` of `{ heading, paragraphs, bullets? }`. A table of contents appears when there is more than one section.
+
+**Reserved slugs:** a policy slug cannot be `about`, `blog`, `contact`, `services` or `styleguide`. The build fails with a clear message if it is. These names come from `constants/routes.ts`, which must also be updated whenever a new top-level page folder is added, or the 404 proxy will block it.
+
+Placeholder wording is not legal advice. Have the final text reviewed before launch.
 
 ## Images
 

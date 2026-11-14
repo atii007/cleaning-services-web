@@ -4,19 +4,23 @@ import { Icon } from '@/components/shared/Icon'
 import { Reveal } from '@/components/shared/Reveal'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { SERVICE_PAGE_COPY } from '@/content/service-page'
-import type { Benefit } from '@/types/content'
+import type { Benefit, SectionCopy } from '@/types/content'
 
 type ServiceBenefitsProps = {
-  serviceTitle: string
   benefits: Benefit[]
+  /** Builds the default heading ("Why customers trust our …"). */
+  serviceTitle?: string
+  /** Overrides the default heading copy entirely. */
+  heading?: SectionCopy
   className?: string
 }
 
 const COPY = SERVICE_PAGE_COPY.benefits
 
 export const ServiceBenefits = ({
-  serviceTitle,
   benefits,
+  serviceTitle = '',
+  heading = { eyebrow: COPY.eyebrow, title: COPY.title(serviceTitle) },
   className,
 }: ServiceBenefitsProps) => (
   <section
@@ -26,8 +30,9 @@ export const ServiceBenefits = ({
     <div className="container-page">
       <SectionHeading
         id="benefits-heading"
-        eyebrow={COPY.eyebrow}
-        title={COPY.title(serviceTitle)}
+        eyebrow={heading.eyebrow}
+        title={heading.title}
+        description={heading.description}
       />
       <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {benefits.map((benefit, index) => (
