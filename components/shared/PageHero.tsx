@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import type * as React from 'react'
 
 import { Breadcrumbs } from '@/components/shared/Breadcrumbs'
 import { SectionHeading } from '@/components/shared/SectionHeading'
@@ -12,6 +13,8 @@ type PageHeroProps = {
   image: ImageAsset
   /** Trail after "Home"; the last item is the current page. */
   breadcrumbs: BreadcrumbItem[]
+  /** Optional buttons under the heading, e.g. `<ContactActions inverse />`. */
+  actions?: React.ReactNode
 }
 
 /** Inner-page banner: photo, scrim, breadcrumbs and the page's single h1. */
@@ -21,6 +24,7 @@ export const PageHero = ({
   description,
   image,
   breadcrumbs,
+  actions,
 }: PageHeroProps) => (
   <section className="relative isolate overflow-hidden bg-inverse">
     <Image
@@ -49,6 +53,7 @@ export const PageHero = ({
           inverse
           className="mt-6"
         />
+        {actions ? <div className="mt-8">{actions}</div> : null}
       </div>
     </div>
   </section>

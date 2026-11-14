@@ -4,7 +4,7 @@ import { cn } from 'cn'
 import { ArrowRightIcon } from 'lucide-react'
 
 import { NavLink } from '@/components/layout/NavLink'
-import { ServiceIcon } from '@/components/shared/ServiceIcon'
+import { Icon } from '@/components/shared/Icon'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -64,7 +64,7 @@ const MegaMenu = ({ item }: { item: NavItem }) => (
             <NavLink href={child.href}>
               {child.icon ? (
                 <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary-muted text-primary-muted-foreground">
-                  <ServiceIcon name={child.icon} className="size-5" />
+                  <Icon name={child.icon} className="size-5" />
                 </span>
               ) : null}
               <span className="flex flex-col gap-0.5">

@@ -15,6 +15,8 @@ type ContactActionsProps = {
   inverse?: boolean
   /** Stack buttons full-width (drawer, narrow cards). */
   stacked?: boolean
+  /** Overrides the quote link, e.g. `#contact` on pages with their own form. */
+  quoteHref?: string
   /** Called when any action is clicked, e.g. to close a drawer. */
   onAction?: () => void
   className?: string
@@ -27,6 +29,7 @@ export const ContactActions = ({
   actions = ['whatsapp', 'call', 'quote'],
   inverse = false,
   stacked = false,
+  quoteHref,
   onAction,
   className,
 }: ContactActionsProps) => {
@@ -46,7 +49,7 @@ export const ContactActions = ({
         if (action === 'quote') {
           return (
             <Button key={action} asChild size="lg" className={buttonClass}>
-              <Link href={ctas.quote.href} onClick={onAction}>
+              <Link href={quoteHref ?? ctas.quote.href} onClick={onAction}>
                 {ctas.quote.label}
               </Link>
             </Button>

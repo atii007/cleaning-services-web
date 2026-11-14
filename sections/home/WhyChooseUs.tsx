@@ -1,13 +1,7 @@
 import Image from 'next/image'
-import type { LucideIcon } from 'lucide-react'
-import {
-  Clock3Icon,
-  LeafIcon,
-  ShieldCheckIcon,
-  ThumbsUpIcon,
-} from 'lucide-react'
 
 import { CountUp } from '@/components/shared/CountUp'
+import { Icon } from '@/components/shared/Icon'
 import { Reveal } from '@/components/shared/Reveal'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import {
@@ -16,14 +10,6 @@ import {
   WHY_US_IMAGE,
   WHY_US_SECTION,
 } from '@/content/home'
-import type { TrustPointIcon } from '@/types/content'
-
-const TRUST_ICONS: Record<TrustPointIcon, LucideIcon> = {
-  shield: ShieldCheckIcon,
-  leaf: LeafIcon,
-  clock: Clock3Icon,
-  'thumbs-up': ThumbsUpIcon,
-}
 
 export const WhyChooseUs = () => (
   <section className="section" aria-labelledby="why-us-heading">
@@ -63,12 +49,11 @@ export const WhyChooseUs = () => (
 
         <ul className="mt-10 grid gap-6 sm:grid-cols-2">
           {TRUST_POINTS.map((point, index) => {
-            const Icon = TRUST_ICONS[point.icon]
             return (
               <li key={point.title}>
                 <Reveal delay={index * 0.08} className="flex gap-4">
                   <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary-muted text-primary-muted-foreground">
-                    <Icon className="size-5" aria-hidden />
+                    <Icon name={point.icon} className="size-5" />
                   </span>
                   <div>
                     <h3 className="text-base font-semibold">{point.title}</h3>

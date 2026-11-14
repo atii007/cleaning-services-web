@@ -2,9 +2,9 @@ import { ArrowRightIcon, SparklesIcon } from 'lucide-react'
 import type * as React from 'react'
 
 import { ContactActions } from '@/components/shared/ContactActions'
+import { Icon } from '@/components/shared/Icon'
 import { Reveal } from '@/components/shared/Reveal'
 import { SectionHeading } from '@/components/shared/SectionHeading'
-import { ServiceIcon } from '@/components/shared/ServiceIcon'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -99,7 +99,7 @@ export const StyleguideComponents = () => (
               <Card className="h-full">
                 <CardHeader>
                   <span className="inline-flex size-12 items-center justify-center rounded-xl bg-primary-muted text-primary-muted-foreground">
-                    <ServiceIcon name={service.icon} className="size-6" />
+                    <Icon name={service.icon} className="size-6" />
                   </span>
                   <CardTitle className="mt-4 font-heading text-xl text-heading">
                     {service.title}

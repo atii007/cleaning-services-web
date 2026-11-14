@@ -1,33 +1,13 @@
 import Link from 'next/link'
-import type { LucideIcon } from 'lucide-react'
-import {
-  AwardIcon,
-  BadgeCheckIcon,
-  ClockIcon,
-  LandmarkIcon,
-  LeafIcon,
-  MailIcon,
-  MapPinIcon,
-  PhoneIcon,
-  RecycleIcon,
-  ShieldCheckIcon,
-} from 'lucide-react'
+import { ClockIcon, MailIcon, MapPinIcon, PhoneIcon } from 'lucide-react'
 import type * as React from 'react'
 
+import { Icon } from '@/components/shared/Icon'
 import { Logo } from '@/components/shared/Logo'
 import { getSocialLabel, SocialIcon } from '@/components/shared/SocialIcon'
 import { SITE_CONFIG } from '@/content/site'
 import { getTelHref } from '@/lib/contact'
-import type { CertificationIcon, NavItem } from '@/types/site'
-
-const CERTIFICATION_ICONS: Record<CertificationIcon, LucideIcon> = {
-  award: AwardIcon,
-  badge: BadgeCheckIcon,
-  leaf: LeafIcon,
-  shield: ShieldCheckIcon,
-  recycle: RecycleIcon,
-  landmark: LandmarkIcon,
-}
+import type { NavItem } from '@/types/site'
 
 const FooterHeading = ({ children }: { children: React.ReactNode }) => (
   <h2 className="text-sm font-semibold tracking-wider text-inverse-foreground uppercase">
@@ -65,14 +45,13 @@ const Certifications = () => (
       <FooterHeading>Licensed &amp; certified</FooterHeading>
       <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-6">
         {SITE_CONFIG.certifications.map((certification) => {
-          const Icon = CERTIFICATION_ICONS[certification.icon]
           return (
             <li
               key={certification.name}
               className="flex items-center gap-3 rounded-xl border border-inverse-muted-foreground/15 p-3 transition-colors hover:border-primary/60"
             >
               <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary-light">
-                <Icon className="size-5" aria-hidden />
+                <Icon name={certification.icon} className="size-5" />
               </span>
               <span className="flex min-w-0 flex-col">
                 <span className="text-sm font-semibold text-inverse-foreground">
