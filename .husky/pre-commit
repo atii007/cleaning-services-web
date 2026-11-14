@@ -1,0 +1,3 @@
+sh scripts/security/scan-malware.sh --staged || exit 1
+yarn lint-staged
+yarn type-check

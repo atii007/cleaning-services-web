@@ -1,0 +1,2 @@
+sh scripts/security/scan-malware.sh --all || echo "WARNING: Pulled code is INFECTED - do not run yarn/node until cleaned."
+exit 0

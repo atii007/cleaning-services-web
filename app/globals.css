@@ -1,0 +1,256 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+/* Class-based dark mode driven by next-themes (<html class="dark">). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ────────────────────────────────────────────────────────────────────────────
+   1. BRAND PALETTE — raw colours. DO NOT use these directly in components.
+      Swap these when the final brand is decided; everything else follows.
+   ──────────────────────────────────────────────────────────────────────────── */
+:root {
+  --brand-teal-50: oklch(0.975 0.015 190);
+  --brand-teal-100: oklch(0.94 0.04 190);
+  --brand-teal-300: oklch(0.8 0.1 190);
+  --brand-teal-500: oklch(0.62 0.12 192);
+  --brand-teal-600: oklch(0.54 0.11 194);
+  --brand-teal-700: oklch(0.46 0.09 196);
+  --brand-teal-900: oklch(0.3 0.05 200);
+
+  --brand-navy-50: oklch(0.97 0.01 255);
+  --brand-navy-100: oklch(0.93 0.02 255);
+  --brand-navy-600: oklch(0.42 0.1 260);
+  --brand-navy-800: oklch(0.28 0.06 260);
+  --brand-navy-900: oklch(0.21 0.04 260);
+  --brand-navy-950: oklch(0.16 0.03 260);
+
+  --brand-lime-400: oklch(0.86 0.17 128);
+  --brand-lime-500: oklch(0.78 0.18 130);
+
+  --brand-gray-50: oklch(0.985 0.002 250);
+  --brand-gray-100: oklch(0.965 0.004 250);
+  --brand-gray-200: oklch(0.925 0.006 250);
+  --brand-gray-400: oklch(0.7 0.012 250);
+  --brand-gray-500: oklch(0.55 0.015 250);
+  --brand-gray-700: oklch(0.37 0.02 255);
+  --brand-white: oklch(1 0 0);
+
+  --brand-green-500: oklch(0.64 0.15 150);
+  --brand-amber-500: oklch(0.77 0.16 75);
+  --brand-red-500: oklch(0.6 0.21 25);
+  --brand-blue-500: oklch(0.6 0.16 245);
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   2. SEMANTIC TOKENS — the only colours components may use.
+   ──────────────────────────────────────────────────────────────────────────── */
+:root {
+  --radius: 0.75rem;
+
+  --background: var(--brand-white);
+  --foreground: var(--brand-gray-700);
+  --heading: var(--brand-navy-900);
+
+  /* Alternating section background */
+  --surface: var(--brand-gray-50);
+  --surface-foreground: var(--brand-gray-700);
+
+  --card: var(--brand-white);
+  --card-foreground: var(--brand-gray-700);
+  --popover: var(--brand-white);
+  --popover-foreground: var(--brand-gray-700);
+
+  --primary: var(--brand-teal-600);
+  --primary-foreground: var(--brand-white);
+  --primary-light: var(--brand-teal-500);
+  --primary-dark: var(--brand-teal-700);
+  --primary-muted: var(--brand-teal-50);
+  --primary-muted-foreground: var(--brand-teal-700);
+
+  --secondary: var(--brand-navy-900);
+  --secondary-foreground: var(--brand-white);
+  --secondary-muted: var(--brand-navy-50);
+  --secondary-muted-foreground: var(--brand-navy-800);
+
+  /* Attention-grabbing highlight (badges, offers) */
+  --highlight: var(--brand-lime-500);
+  --highlight-foreground: var(--brand-navy-950);
+
+  --muted: var(--brand-gray-100);
+  --muted-foreground: var(--brand-gray-500);
+  --accent: var(--brand-teal-50);
+  --accent-foreground: var(--brand-teal-700);
+
+  --success: var(--brand-green-500);
+  --success-foreground: var(--brand-white);
+  --warning: var(--brand-amber-500);
+  --warning-foreground: var(--brand-navy-950);
+  --info: var(--brand-blue-500);
+  --info-foreground: var(--brand-white);
+  --destructive: var(--brand-red-500);
+  --destructive-foreground: var(--brand-white);
+
+  --border: var(--brand-gray-200);
+  --input: var(--brand-gray-200);
+  --ring: var(--brand-teal-500);
+
+  /* Footer / dark bands stay dark in both themes */
+  --inverse: var(--brand-navy-950);
+  --inverse-foreground: var(--brand-gray-200);
+  --inverse-muted-foreground: var(--brand-gray-400);
+}
+
+.dark {
+  --background: var(--brand-navy-950);
+  --foreground: var(--brand-gray-200);
+  --heading: var(--brand-white);
+
+  --surface: var(--brand-navy-900);
+  --surface-foreground: var(--brand-gray-200);
+
+  --card: var(--brand-navy-900);
+  --card-foreground: var(--brand-gray-200);
+  --popover: var(--brand-navy-900);
+  --popover-foreground: var(--brand-gray-200);
+
+  --primary: var(--brand-teal-500);
+  --primary-foreground: var(--brand-navy-950);
+  --primary-light: var(--brand-teal-300);
+  --primary-dark: var(--brand-teal-600);
+  --primary-muted: oklch(0.3 0.05 200 / 45%);
+  --primary-muted-foreground: var(--brand-teal-300);
+
+  --secondary: var(--brand-navy-100);
+  --secondary-foreground: var(--brand-navy-950);
+  --secondary-muted: var(--brand-navy-800);
+  --secondary-muted-foreground: var(--brand-navy-100);
+
+  --highlight: var(--brand-lime-400);
+  --highlight-foreground: var(--brand-navy-950);
+
+  --muted: var(--brand-navy-800);
+  --muted-foreground: var(--brand-gray-400);
+  --accent: var(--brand-navy-800);
+  --accent-foreground: var(--brand-teal-300);
+
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: var(--brand-teal-300);
+
+  --inverse: oklch(0.12 0.02 260);
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   3. TAILWIND THEME — exposes tokens as utilities (bg-primary, text-heading…)
+   ──────────────────────────────────────────────────────────────────────────── */
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-jakarta);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-heading: var(--heading);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-light: var(--primary-light);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-muted: var(--primary-muted);
+  --color-primary-muted-foreground: var(--primary-muted-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-muted: var(--secondary-muted);
+  --color-secondary-muted-foreground: var(--secondary-muted-foreground);
+
+  --color-highlight: var(--highlight);
+  --color-highlight-foreground: var(--highlight-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-inverse: var(--inverse);
+  --color-inverse-foreground: var(--inverse-foreground);
+  --color-inverse-muted-foreground: var(--inverse-muted-foreground);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Single source for vertical rhythm between page sections. */
+@utility section {
+  padding-block: 4rem;
+  @media (width >= 48rem) {
+    padding-block: 6rem;
+  }
+}
+
+/* Centered page container with a 1rem minimum gutter. */
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1rem;
+  @media (width >= 40rem) {
+    padding-inline: 1.5rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply scroll-smooth font-sans;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading tracking-tight text-balance text-heading;
+  }
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      @apply scroll-auto;
+    }
+  }
+}

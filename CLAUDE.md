@@ -1,0 +1,3 @@
+@AGENTS.md
+@docs/agent/ALWAYS-APPLY-RULES.md
+@docs/CODE-BEST-PRACTICES.md

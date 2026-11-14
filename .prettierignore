@@ -1,0 +1,11 @@
+node_modules
+.next
+out
+build
+coverage
+.vercel
+.yarn
+yarn.lock
+next-env.d.ts
+*.tsbuildinfo
+public
