@@ -30,7 +30,7 @@ export const SITE_CONFIG = {
     availability: 'Always online — book any time, day or night',
   },
   ctas: {
-    quote: { label: 'Get a free quote', href: '/contact' },
+    quote: { label: 'Get a free quote', href: '/#contact' },
     call: 'Call us',
     whatsapp: 'WhatsApp us',
   },
@@ -52,7 +52,7 @@ export const SITE_CONFIG = {
         description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tell us about your space.',
         image: PLACEHOLDER_IMAGES.bathroom,
-        cta: { label: 'Get a free quote', href: '/contact' },
+        cta: { label: 'Get a free quote', href: '/#contact' },
       },
     },
     { label: 'Blog', href: '/blog' },

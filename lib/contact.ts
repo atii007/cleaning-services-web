@@ -1,4 +1,6 @@
+import { SERVICE_CATEGORIES } from '@/content/services'
 import { SITE_CONFIG } from '@/content/site'
+import type { EnquiryValues } from '@/schemas/enquiry'
 
 /**
  * Contact link builders. Kept free of `lib/env` so client components can
@@ -10,3 +12,22 @@ export const getWhatsAppUrl = (
   `https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(message)}`
 
 export const getTelHref = (tel: string): string => `tel:${tel}`
+
+const getServiceLabel = (value: string): string =>
+  SERVICE_CATEGORIES.find((service) => service.slug === value)?.title ??
+  'Other / not sure'
+
+/** Readable multi-line WhatsApp message for an enquiry. Skips empty fields. */
+export const buildEnquiryMessage = (values: EnquiryValues): string => {
+  const lines = [
+    `Hi ${SITE_CONFIG.shortName}, I'd like to book a service.`,
+    '',
+    `Name: ${values.name}`,
+    `Phone: ${values.phone}`,
+    `Service: ${getServiceLabel(values.service)}`,
+    values.area ? `Area: ${values.area}` : null,
+    values.preferredDate ? `Preferred date: ${values.preferredDate}` : null,
+    values.message ? `\nDetails: ${values.message}` : null,
+  ]
+  return lines.filter((line) => line !== null).join('\n')
+}

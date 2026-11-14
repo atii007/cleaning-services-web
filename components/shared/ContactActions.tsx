@@ -24,7 +24,7 @@ const BUTTON_SIZE = 'h-12 px-6 text-base'
 
 /** Shared quote / call / WhatsApp button group. */
 export const ContactActions = ({
-  actions = ['quote', 'call', 'whatsapp'],
+  actions = ['whatsapp', 'call', 'quote'],
   inverse = false,
   stacked = false,
   onAction,
