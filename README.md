@@ -48,4 +48,5 @@ yarn dev                     # http://localhost:3000
 
 1. Import the GitHub repo in Vercel. It detects Next.js and Yarn 4 automatically.
 2. Set `NEXT_PUBLIC_SITE_URL` for Production. Preview builds fall back to the Vercel URL.
-3. Production branch: `main`.
+3. Production branch: `main`. Set it explicitly in **Settings → Environments → Production → Branch Tracking**. Vercel defaults to the GitHub default branch, which is `development`.
+4. Every push to `development` and to feature branches gets a preview deployment.

@@ -6,6 +6,8 @@
 | `development`                                                 | Integration branch                           | Vercel preview             |
 | `feat/<short-name>`, `fix/<short-name>`, `chore/<short-name>` | Day-to-day work, branched from `development` | Vercel preview, one per PR |
 
+`development` is the **default branch on GitHub**: clones, new PRs and the repo landing page all target it. `main` only changes through release PRs and is the only branch that deploys to production.
+
 ## Flow
 
 1. Branch from `development`, e.g. `git switch -c feat/home-hero development`.
